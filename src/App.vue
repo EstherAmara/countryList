@@ -1,17 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SelectItems 
+      :countries = "countries"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SelectItems from './components/SelectItems.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SelectItems
+  },
+
+  data() {
+    return {
+      countries: [],
+      index: 0,
+    }
+  },
+
+  mounted: function() {
+    fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries%2Bstates%2Bcities.json', {
+      method: 'get'
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(jsonData => {
+      this.countries = jsonData
+    })
   }
 }
 </script>
