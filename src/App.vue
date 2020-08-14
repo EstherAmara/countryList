@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <NavBar />
     <SelectItems 
       :countries = "countries"
     />
@@ -8,17 +9,18 @@
 
 <script>
 import SelectItems from './components/SelectItems.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    SelectItems
+    SelectItems,
+    NavBar
   },
 
   data() {
     return {
       countries: [],
-      index: 0,
     }
   },
 

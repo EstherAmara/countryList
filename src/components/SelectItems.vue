@@ -1,46 +1,50 @@
 <template>
     <div>
-        <select
-            v-model="chooseCountry"
-            @change="selectState(chooseCountry)"   
-        >  
-            <option 
-            v-for="country in countries"
-            :value="country.id" 
-            :key = country.id> 
-                {{country.name}} {{country.id}} 
-            </option>
-        </select>
-        
-        {{showId}}
-        <select
-            v-model="chooseState"
-            @change="selectCity(chooseState)"
-        >
-            <option
-            v-for="state in states"
-            :key="state.id"
-            :value="state.id"
+        <h2 class="p-3 bold text-primary">Choose your country, state and city and we'll display your choice</h2>
+        <div class="form-group col-md-6 offset-md-3">
+            <select
+                v-model="chooseCountry"
+                @change="selectState(chooseCountry)" 
+                class="form-control form-control-lg mt-4 mb-4"  
+            >  
+                <option 
+                v-for="country in countries"
+                :value="country.id" 
+                :key = country.id> 
+                    {{country.name}}
+                </option>
+            </select>
+            
+            <select
+                v-model="chooseState"
+                @change="selectCity(chooseState)"
+                class="form-control form-control-lg mt-4 mb-4"  
             >
-                {{state.name}}
-            </option>
-        </select>
+                <option
+                v-for="state in states"
+                :key="state.id"
+                :value="state.id"
+                >
+                    {{state.name}}
+                </option>
+            </select>
 
-        {{cityId}}
-        <select
-            v-model="chooseCity"
-            @change="listDetails(chooseCity)"
-        >
-            <option
-            v-for="city in cities"
-            :key="city.id"
-            :value="city.id"
+            <select
+                v-model="chooseCity"
+                @change="listDetails(chooseCity)"
+                class="form-control form-control-lg mt-4 mb-4"  
             >
-                {{city.name}}
-            </option>
-        </select>
+                <option
+                v-for="city in cities"
+                :key="city.id"
+                :value="city.id"
+                >
+                    {{city.name}}
+                </option>
+            </select>
 
-        {{details}}
+            <h5 class="text-danger"> {{details}} </h5>
+        </div>
     </div>
 </template>
 
@@ -75,8 +79,15 @@ export default {
         listDetails(chooseCity) {
             const city = this.cities.find((e) => e.id == chooseCity);
             this.cityName = city.name;
-            this.details = "The Country chosen is " + this.countryName + " and the state chosen is " + this.stateName + " and the city chosen is " + this.cityName;
+            this.details = "Your country choice is " + this.countryName + ", state is " + this.stateName + " and city is " + this.cityName;
         }
     },
 }
 </script>
+
+<style>
+    .text-primary {
+        color: #065f6d !important;
+        font-weight: bolder;
+    }
+</style>
